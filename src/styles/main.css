@@ -1369,7 +1369,7 @@ html:not(.has-scroll-smooth) .c-fixed {
 @media (max-width: 699px) {
   .c-direction-block {
     bottom: 0;
-    top: -15vh;
+    top: -140vh;
   }
 }
 @media (min-width: 1000px) and (max-width: 1199px) {

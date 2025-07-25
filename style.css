@@ -95,6 +95,18 @@ body {
     gap: 2rem;
     flex: 1;
   }
+
+@media screen and (max-width: 768px) {
+    .gallery-row {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .gallery-row.reverse {
+    flex-direction: column !important;
+    align-items: center;
+  }
+  }
   
   .gallery-row.reverse {
     flex-direction: row-reverse;
@@ -118,7 +130,7 @@ body {
   }
 
   .image img:hover {
-    transform: scale(1.05);
+    transform: scale(1.15);
     transition: transform 0.3s ease;
   }
   
