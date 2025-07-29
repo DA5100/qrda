@@ -25,56 +25,18 @@
     <div data-scroll-container>
 
       <div class="hero" data-scroll-section>  
-          <img src="src/img/logo.png" alt="Logo DA" data-scroll data-scroll-speed="1">
-          <a href="#swiper" data-scroll data-scroll-speed="2" data-scroll-position="top"> Discover </a>
+        <img src="src/img/logo.png" alt="Logo DA" data-scroll data-scroll-speed="1">
+        <a href="#swiper" data-scroll data-scroll-speed="2" data-scroll-position="top"
+          onclick="location.hash = '#swiper'; window.location.reload();">
+          Discover
+        </a>
       </div>
   
       <div class="gallery" data-scroll-section>
-        <div class="gallery-row" data-scroll data-scroll-speed="3">
-          <div class="image">
-            <img src="https://da5100.github.io/assets/img/portfolio/branding-2.jpg" alt="Gambar Kiri">
-          </div>
-          <div class="text" data-scroll data-scroll-speed="3">
-            <!-- <p>Gambar di kiri, teks di kanan.</p> -->
-          </div>
-        </div>
-    
-        <div class="gallery-row reverse" data-scroll data-scroll-speed="5">
-          <div class="image">
-            <img src="https://da5100.github.io/assets/img/portfolio/branding-6.jpg" alt="Gambar Kanan">
-          </div>
-          <div class="text" data-scroll data-scroll-speed="1">
-            <!-- <p>Gambar di kanan, teks di kiri.</p> -->
-          </div>
-        </div>
-    
-        <div class="gallery-row" data-scroll data-scroll-speed="2">
-          <div class="image">
-            <img src="https://da5100.github.io/assets/img/portfolio/branding-7.jpg" alt="Gambar Kiri Lagi">
-          </div>
-          <div class="text" data-scroll data-scroll-speed="3">
-            <!-- <p>Gambar kiri lagi, teks kanan.</p> -->
-          </div>
-        </div>
-    
-        <div class="gallery-row reverse" data-scroll data-scroll-speed="3">
-          <div class="image">
-            <img src="https://da5100.github.io/assets/img/portfolio/books-1.jpg" alt="Gambar Kanan">
-          </div>
-          <div class="text" data-scroll data-scroll-speed="1">
-            <!-- <p>Gambar di kanan, teks di kiri.</p> -->
-          </div>
-        </div>
-    
-        <div class="gallery-row" data-scroll data-scroll-speed="5">
-          <div class="image">
-            <img src="https://da5100.github.io/assets/img/portfolio/books-3.jpg" alt="Gambar Kiri Lagi">
-          </div>
-          <div class="text" data-scroll data-scroll-speed="3">
-            <!-- <p>Gambar kiri lagi, teks kanan.</p> -->
-          </div>
-        </div>
-
+        <img src="https://da5100.github.io/assets/img/portfolio/books-1.webp" alt="Gambar">
+        <img class="reverse" src="https://da5100.github.io/assets/img/portfolio/branding-2.webp" alt="Gambar">
+        <img src="https://da5100.github.io/assets/img/portfolio/books-2.webp" alt="Gambar">
+        <img class="reverse" src="https://da5100.github.io/assets/img/portfolio/books-3.webp" alt="Gambar">
       </div>
 
       <div class="text-animation" data-scroll-section>
@@ -118,6 +80,36 @@
     
     </div>
     <script src="src/scripts/main.js"></script>
+
+    <script>
+        function rotateImagesOnScroll() {
+            const gallery = document.querySelector('.gallery');
+            const images = gallery ? gallery.querySelectorAll('img') : [];
+            const viewportHeight = window.innerHeight;
+
+            images.forEach((img, index) => {
+          const rect = img.getBoundingClientRect();
+          const imgCenter = rect.top + rect.height / 2;
+          const screenCenter = viewportHeight / 2;
+
+          // Calculate translation based on distance from center
+          let translateXValue = 700 * ((imgCenter - screenCenter) / screenCenter);
+
+          // Clamp translation between -1000px and +1000px
+          translateXValue = Math.max(-1000, Math.min(1000, translateXValue));
+
+          // Alternate the direction: odd-index images use positive, even-index images use negative
+          if (index % 2 !== 0) {
+              translateXValue = -translateXValue;
+          }
+
+          img.style.transform = `translateX(${translateXValue}px)`;
+            });
+        }
+
+        window.addEventListener('resize', rotateImagesOnScroll);
+        document.addEventListener('DOMContentLoaded', rotateImagesOnScroll);
+    </script>
     <script>
       const scroll = new LocomotiveScroll({
           el: document.querySelector("[data-scroll-container]"),
@@ -137,9 +129,12 @@
           reloadOnContextChange: true
       });
 
+      scroll.on('scroll', () => {
+        rotateImagesOnScroll();
+      });
+
       window.addEventListener('load', () => {
-      scroll.update();
-    });
+        scroll.update();
+      });
     </script>
-</body>
 </html>

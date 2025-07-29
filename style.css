@@ -47,6 +47,7 @@ body {
     align-items: center;
     gap: 2rem;
     background-color: black;
+    z-index: 15;
     /* position: absolute;
     top: 0;
     left: 0;
@@ -59,6 +60,12 @@ body {
     height: auto;
     width: auto;
     filter: invert(1);
+}
+
+@media (max-width: 425px) {
+    .hero img {
+        max-height: 150px; /* Atur untuk layar kecil */
+    }
 }
 
 .hero a {
@@ -80,64 +87,41 @@ body {
 /* Gallery */
 
 .gallery {
-    background-color: var(--brown);
-    height: 300vh;
-    width: 100%;   
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    padding: 2rem;
+    justify-content: center;
+    align-items: center;
+    /* height: 100vh; */
+    width: 100%;
+    /* background-color: #f0f0f0; */
+    gap: 3rem;
+    background-color: var(--brown); 
+    padding-bottom: 40vh;  
 }
 
-.gallery-row {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    flex: 1;
-  }
-
-@media screen and (max-width: 768px) {
-    .gallery-row {
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .gallery-row.reverse {
-    flex-direction: column !important;
-    align-items: center;
-  }
-  }
-  
-  .gallery-row.reverse {
-    flex-direction: row-reverse;
-  }
-
-  .gallery-row * {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .image, .text {
-    flex: 1;
-    padding: 1rem;
-  }
-  
-  .image img {
+.gallery img {
+    z-index: 50;
     width: auto;
-    max-height: 400px;
+    max-height: 250px;
     object-fit: cover;
     border-radius: 10px;
-  }
+    box-shadow: 0px 5px 15px 2px rgba(0,0,0,0.5);
+    /* transform: rotate3D(1, 1, 0, deg); */
+}
 
-  .image img:hover {
-    transform: scale(1.15);
-    transition: transform 0.3s ease;
-  }
-  
-  .text p {
-    font-size: 1.2rem;
-  }
+@media screen and (min-width: 1024px) {
+    .gallery img {
+        max-height: 400px;
+    }
+}
 
+.gallery img:first-child {
+    margin-top: 1rem;
+}
+
+.gallery img:last-child {
+    margin-bottom: -3rem;
+}
 /* Text Animation */
 
 .text-animation {

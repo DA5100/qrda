@@ -1390,6 +1390,13 @@ html:not(.has-scroll-smooth) .c-fixed {
   text-transform: uppercase;
   white-space: nowrap;
 }
+
+@media (max-width: 425px) {
+  .c-direction-block_item {
+    font-size: 20vw;
+  }
+}
+
 .c-direction-block_item span {
   background-color: transparent;
   display: block;
