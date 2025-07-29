@@ -37,6 +37,10 @@
         <img class="reverse" src="https://da5100.github.io/assets/img/portfolio/branding-2.webp" alt="Gambar">
         <img src="https://da5100.github.io/assets/img/portfolio/books-2.webp" alt="Gambar">
         <img class="reverse" src="https://da5100.github.io/assets/img/portfolio/books-3.webp" alt="Gambar">
+        <img src="https://da5100.github.io/assets/img/portfolio/books-1.webp" alt="Gambar">
+        <img class="reverse" src="https://da5100.github.io/assets/img/portfolio/branding-2.webp" alt="Gambar">
+        <img src="https://da5100.github.io/assets/img/portfolio/books-2.webp" alt="Gambar">
+        <img class="reverse" src="https://da5100.github.io/assets/img/portfolio/books-3.webp" alt="Gambar">
       </div>
 
       <div class="text-animation" data-scroll-section>
@@ -86,24 +90,32 @@
             const gallery = document.querySelector('.gallery');
             const images = gallery ? gallery.querySelectorAll('img') : [];
             const viewportHeight = window.innerHeight;
+            const centerThreshold = 100; // pixels tolerance for center
 
             images.forEach((img, index) => {
           const rect = img.getBoundingClientRect();
           const imgCenter = rect.top + rect.height / 2;
           const screenCenter = viewportHeight / 2;
 
-          // Calculate translation based on distance from center
-          let translateXValue = 700 * ((imgCenter - screenCenter) / screenCenter);
+          // Calculate a fixed factor based on distance from center
+          const factor = 700 * Math.abs((imgCenter - screenCenter) / screenCenter);
+          // Alternate direction: even indexes from right, odd from left
+          let translateXValue = (index % 2 === 0) ? factor : -factor;
+          translateXValue = Math.max(-1200, Math.min(1200, translateXValue));
 
-          // Clamp translation between -1000px and +1000px
-          translateXValue = Math.max(-1000, Math.min(1000, translateXValue));
+          // Determine scale based on proximity to center
+          const distanceFromCenter = imgCenter - screenCenter;
+          const scaleValue = (Math.abs(distanceFromCenter) < centerThreshold) ? 1.2 : 1;
 
-          // Alternate the direction: odd-index images use positive, even-index images use negative
-          if (index % 2 !== 0) {
-              translateXValue = -translateXValue;
+          // Rotate based on the image's position relative to the center
+          let rotateValue;
+          if (index % 2 === 0) {
+              rotateValue = 10 + (20 * distanceFromCenter / viewportHeight);
+          } else {
+              rotateValue = -10 - (20 * distanceFromCenter / viewportHeight);
           }
 
-          img.style.transform = `translateX(${translateXValue}px)`;
+          img.style.transform = `translateX(${translateXValue}px) scale(${scaleValue}) rotate(${rotateValue}deg)`;
             });
         }
 
