@@ -99,6 +99,12 @@ body {
     padding-bottom: 40vh;  
 }
 
+@media screen and (min-width: 425px) {
+    .gallery {
+        gap: 0.5rem;
+    }
+}
+
 .gallery img {
     z-index: 50;
     width: auto;
@@ -126,6 +132,18 @@ body {
 
 .text-animation {
     background-color: var(--brown);
+}
+
+@media screen and (min-width: 1024px) {
+    .text-animasi {
+    font-size: 10vw;
+}
+}
+
+@media screen and (min-width: 425px) {
+    .text-animasi {
+    font-size: 20vw;
+}
 }
 
 /* Swiper */
