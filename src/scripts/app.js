@@ -1,4 +1,4 @@
-let sessionToken = sessionStorage.getItem("session").toString();
+let sessionToken = sessionStorage.getItem("session");
 const params = new URLSearchParams(window.location.search);
 const userToken = params.get("session");
 
