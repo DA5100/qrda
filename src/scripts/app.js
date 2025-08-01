@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function(){
         if(!userToken || !doc.exists) {
             alert("Token/Serial tidak ada!")
             window.location.href = "https://da5100.github.io/auth/"
-        } else if(!serialKey){
+        } else if (!serialKey) {
             alert("Serial key tidak ada!")
             window.location.href = "https://da5100.github.io/auth/"
         }else if(emailDatamd5 !== emailmd5){
