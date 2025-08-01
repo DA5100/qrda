@@ -29,6 +29,11 @@ document.addEventListener("DOMContentLoaded", function(){
         const keyRef = db.collection("lisensi").doc(serialKey);
         const emailmd5 = CryptoJS.MD5(email).toString();
 
+       if (!serialKey) {
+            alert("Serial key tidak ditemukan. Silakan masukkan serial key yang valid.");
+            window.location.href = "https://da5100.github.io/auth/";
+            return;
+        } else {
         keyRef.get().then((doc) => {
         let getData = doc.data();
         const emailDatamd5 = CryptoJS.MD5(getData.email).toString();
@@ -44,8 +49,9 @@ document.addEventListener("DOMContentLoaded", function(){
             window.location.href = "https://da5100.github.io/auth/"
         } else {
             console.log("Email: " + getData.email + " valid!, md5: " + emailDatamd5 + " | " + emailmd5);
-    }
+        }
     });
+        }
     }
     
     
