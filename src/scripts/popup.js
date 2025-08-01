@@ -144,11 +144,13 @@ function closePopup() {
   }
 }
 
-window.onpopstate = function() {
-  if (onLoad == true && !firstLoad) {
+window.addEventListener("popstate", function() {
+  if (onLoad == true && firstLoad !== true) {
     popup.classList.remove("hidden");
+    this.window.location.reload();
   } else {
     const popup = document.getElementById("popup");
     popup.classList.add("hidden");
   }
-}
+});
+
