@@ -1,25 +1,52 @@
 let devtoolsDetected = false;
+const threshold = 160; // ms pause threshold
+const checkInterval = 1000; // check every 1 sec
+const samples = 3; // number of samples to average
+let durations = [];
 
-setInterval(() => {
-  const threshold = 160;
-  const start = new Date();
-  debugger; // Will pause if DevTools is open
-  const duration = new Date() - start;
+function checkDevTools() {
+  const start = performance.now();
 
-  if (duration > threshold && !devtoolsDetected) {
+  debugger; // will pause if DevTools open
+
+  const duration = performance.now() - start;
+  durations.push(duration);
+
+  // Keep only last N samples
+  if (durations.length > samples) durations.shift();
+
+  // Calculate average duration
+  const avgDuration = durations.reduce((a,b) => a + b, 0) / durations.length;
+
+  if (avgDuration > threshold && !devtoolsDetected) {
     devtoolsDetected = true;
-
-    // Loop of alert dialogs
-    for (let i = 0; i < 3; i++) {
-      alert("Developer tools detected. Please close them.");
-    }
-
-    // Optional redirect or tab close
-    window.location.href = "https://da5100.github.io/auth/"; // Redirect to a specific URL
-    // Or close the window (if allowed by browser)  
-    window.close();
-  } else if (devtoolsDetected) {
-    // If DevTools is closed, reset the detection flag
+    onDevToolsDetected();
+  } else if (avgDuration <= threshold && devtoolsDetected) {
+    // DevTools closed or paused no longer detected
     devtoolsDetected = false;
+    onDevToolsClosed();
   }
-}, 1000);
+}
+
+function onDevToolsDetected() {
+  // Show a single alert or custom modal
+  alert("Developer tools detected. Please close them.");
+
+  // Redirect after delay to allow user to read alert
+  setTimeout(() => {
+    window.location.href = "about:blank";
+  }, 1000);
+
+  // Optional: attempt to close tab (may not work in all browsers)
+  setTimeout(() => {
+    window.close();
+  }, 1500);
+}
+
+function onDevToolsClosed() {
+  console.log("DevTools closed");
+  // Optionally reset UI or flags
+}
+
+// Start the periodic check
+setInterval(checkDevTools, checkInterval);
