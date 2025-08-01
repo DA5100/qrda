@@ -1,6 +1,7 @@
 let url;
+let onLoad;
 
-function openPopup(title, content, type, redirectUrl = null) {
+function openPopup(title, content, type, redirectUrl = null, onLoad = null) {
 
   const style = document.createElement("style");
   style.textContent = `
@@ -84,8 +85,7 @@ function openPopup(title, content, type, redirectUrl = null) {
   background-color: #3b82f6; /* Blue */
 }
 `;
-document.head.append(style)
-
+    document.head.append(style)
     const popup = document.createElement("div");
     popup.id = "popup";
     popup.className = "popup hidden";
@@ -111,6 +111,7 @@ document.head.append(style)
     closeButton.textContent = "Close";
     closeButton.setAttribute("onclick", "closePopup()");
     actions.appendChild(closeButton);
+
     // Reset classes
   popupContent.className = "popup-content";
 
@@ -131,14 +132,22 @@ document.head.append(style)
 
   url = redirectUrl;
   popup.classList.remove("hidden");
-
-
-  
+  firstLoad = false;
 }
+
 function closePopup() {
   const popup = document.getElementById("popup");
   popup.classList.add("hidden");
   if (url) {
     window.location.href = url;
+  }
+}
+
+window.onload = function() {
+  if (onLoad == true && !firstLoad) {
+    popup.classList.remove("hidden");
+  } else {
+    const popup = document.getElementById("popup");
+    popup.classList.add("hidden");
   }
 }
