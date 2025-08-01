@@ -84,7 +84,7 @@ function openPopup(title, content, type, redirectUrl = null) {
   background-color: #3b82f6; /* Blue */
 }
 `;
-   
+document.head.append(style)
 
     const popup = document.createElement("div");
     popup.id = "popup";
