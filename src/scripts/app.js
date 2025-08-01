@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function(){
     auth.onAuthStateChanged((user) => {
     const currentUser = auth.currentUser;
     if (!currentUser) {
-        alert("Anda belum login. Silakan login terlebih dahulu.");
+        openPopup("Error", "Anda belum login. Silakan login terlebih dahulu untuk melanjutkan.", "error", "https://da5100.github.io/auth/");
         window.location.href = "https://da5100.github.io/auth/";
         return;
     } else {
