@@ -1,8 +1,12 @@
 let url;
 let firstLoad = true;
 
-window.addEventListener("popstate", function() {
-  window.location.reload();
+window.addEventListener("pageshow", function(event) {
+  if(event.persisted || (window.performance && window.performance.navigation.type === window.performance.navigation.TYPE_BACK_FORWARD)) {
+    // If the page is loaded from the cache (back/forward navigation) or if the page was restored from the bfcache
+    window.location.reload();
+  }
+  
 });
 
 function openPopup(title, content, type, redirectUrl = null, onLoad = null) {
