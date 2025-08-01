@@ -8,7 +8,7 @@ const firebaseConfig = {
     appId: "1:348583435302:web:someUniqueWebId",    
     measurementId: "G-DGF0CP099H"                  
 };
-firebase.initializeApp(firebaseConfig);
+const app = firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
 const params = new URLSearchParams(window.location.search);
