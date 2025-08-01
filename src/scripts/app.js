@@ -26,7 +26,6 @@ document.addEventListener("DOMContentLoaded", function(){
         console.log("User is logged in:", user.displayName); 
     
         const email = String(user.email);
-        const keyRef = db.collection("lisensi").doc(serialKey);
         const emailmd5 = CryptoJS.MD5(email).toString();
 
        if (!serialKey) {
@@ -34,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function(){
             window.location.href = "https://da5100.github.io/auth/";
             return;
         } else {
+        const keyRef = db.collection("lisensi").doc(serialKey);
         keyRef.get().then((doc) => {
         let getData = doc.data();
         const emailDatamd5 = CryptoJS.MD5(getData.email).toString();
