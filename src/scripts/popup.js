@@ -144,11 +144,6 @@ function closePopup() {
 }
 
 window.addEventListener("popstate", function() {
-  if (firstLoad !== true) {
-    this.window.location.reload();
-  } else {
-    const popup = document.getElementById("popup");
-    popup.classList.add("hidden");
-  }
+  window.location.reload();
 });
 
