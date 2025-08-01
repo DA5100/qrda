@@ -1,7 +1,6 @@
 let url;
 
 function openPopup(title, content, type, redirectUrl = null) {
-
   
     const popup = document.createElement("div");
     popup.id = "popup";
@@ -26,6 +25,7 @@ function openPopup(title, content, type, redirectUrl = null) {
     const closeButton = document.createElement("button");
     closeButton.id = "close-btn";
     closeButton.textContent = "Close";
+    closeButton.setAttribute("onclick", "closePopup()");
     actions.appendChild(closeButton);
     // Reset classes
   popupContent.className = "popup-content";
