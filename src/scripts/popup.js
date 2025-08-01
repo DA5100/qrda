@@ -2,7 +2,7 @@ let url;
 
 function openPopup(title, content, type, redirectUrl = null) {
 
-  document.addEventListener("DOMContentLoaded", function () {
+  
     const popup = document.createElement("div");
     popup.id = "popup";
     document.body.appendChild(popup);
@@ -46,7 +46,7 @@ function openPopup(title, content, type, redirectUrl = null) {
 
   url = redirectUrl;
   popup.classList.remove("hidden");
-  });
+
 
   
 }
