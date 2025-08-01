@@ -1,5 +1,6 @@
 let url;
 let onLoad;
+let firstLoad = true;
 
 function openPopup(title, content, type, redirectUrl = null, onLoad = null) {
 

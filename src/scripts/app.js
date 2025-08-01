@@ -29,8 +29,7 @@ document.addEventListener("DOMContentLoaded", function(){
         const emailmd5 = CryptoJS.MD5(email).toString();
 
        if (!serialKey) {
-            alert("Serial key tidak ditemukan. Silakan masukkan serial key yang valid.");
-            window.location.href = "https://da5100.github.io/auth/";
+            openPopup("Error", "Serial key tidak ditemukan. Silakan masukkan serial key yang valid.", "error", "https://da5100.github.io/auth/");
             return;
         } else {
         const keyRef = db.collection("lisensi").doc(serialKey);
@@ -39,13 +38,13 @@ document.addEventListener("DOMContentLoaded", function(){
         const emailDatamd5 = CryptoJS.MD5(getData.email).toString();
 
         if(!userToken || !doc.exists) {
-            alert("Token/Serial tidak ada!")
+            openPopup("Error", "User Token tidak ada!", "error", "https://da5100.github.io/auth/");
             window.location.href = "https://da5100.github.io/auth/"
         } else if (!serialKey) {
-            alert("Serial key tidak ada!")
+            openPopup("Error", "Serial key tidak ditemukan. Silakan masukkan serial key yang valid.", "error", "https://da5100.github.io/auth/");
             window.location.href = "https://da5100.github.io/auth/"
         }else if(emailDatamd5 !== emailmd5){
-            alert("Sesi tidak sah! Coba login kembali menggunakan akun yang terdaftar!")
+            openPopup("Error", "Sesi tidak sah! Coba login kembali menggunakan akun yang terdaftar!", "error", "https://da5100.github.io/auth/");
             window.location.href = "https://da5100.github.io/auth/"
         } else {
             console.log("Email: " + getData.email + " valid!, md5: " + emailDatamd5 + " | " + emailmd5);
