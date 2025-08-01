@@ -1,5 +1,3 @@
-document.addEventListener("DOMContentLoaded", function() {
-
 let url;
 
 function openPopup(title, content, type, redirectUrl = null) {
@@ -53,4 +51,3 @@ function closePopup() {
   popup.classList.add("hidden");
   url = null;
 }
-});
