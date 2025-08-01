@@ -1,5 +1,4 @@
 let url;
-let onLoad;
 let firstLoad = true;
 
 function openPopup(title, content, type, redirectUrl = null, onLoad = null) {
@@ -145,8 +144,7 @@ function closePopup() {
 }
 
 window.addEventListener("popstate", function() {
-  if (onLoad == true && firstLoad !== true) {
-    popup.classList.remove("hidden");
+  if (firstLoad !== true) {
     this.window.location.reload();
   } else {
     const popup = document.getElementById("popup");
