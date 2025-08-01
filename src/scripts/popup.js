@@ -143,7 +143,7 @@ function closePopup() {
   }
 }
 
-window.onload = function() {
+window.onpopstate = function() {
   if (onLoad == true && !firstLoad) {
     popup.classList.remove("hidden");
   } else {
