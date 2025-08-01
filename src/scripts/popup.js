@@ -1,16 +1,13 @@
-"use strict";
 
 document.addEventListener("DOMContentLoaded", function() {
-
 let url;
-
 function openPopup(title, content, type, url = null) {
     const popup = document.getElementById("popup");
     const popupContent = document.getElementById("popup-content");
     const titleElement = document.getElementById("popup-title");
     const messageElement = document.getElementById("popup-message");
 
-    popupContent.className("rounded-lg p-6 w-80 text-white shadow-lg");
+    popupContent.className = "rounded-lg p-6 w-80 text-white shadow-lg";
     
     switch(type){
         case "success":
