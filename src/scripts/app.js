@@ -17,33 +17,33 @@ const serialKey = params.get("serial_key");
 
 document.addEventListener("DOMContentLoaded", function(){
     auth.onAuthStateChanged((user) => {
-    if (!user) {
+    const currentUser = auth.currentUser;
+    if (!currentUser) {
         alert("Anda belum login. Silakan login terlebih dahulu.");
         window.location.href = "https://da5100.github.io/auth/";
         return;
-    }
-    if (user) {
+    } else {
         console.log("User is logged in:", user.displayName); 
     
-    const email = String(user.email);
-    const keyRef = db.collection("lisensi").doc(serialKey);
-    const emailmd5 = CryptoJS.MD5(email).toString();
+        const email = String(user.email);
+        const keyRef = db.collection("lisensi").doc(serialKey);
+        const emailmd5 = CryptoJS.MD5(email).toString();
 
-    keyRef.get().then((doc) => {
-    let getData = doc.data();
-    const emailDatamd5 = CryptoJS.MD5(getData.email).toString();
+        keyRef.get().then((doc) => {
+        let getData = doc.data();
+        const emailDatamd5 = CryptoJS.MD5(getData.email).toString();
 
-    if(!userToken || !doc.exists) {
-        alert("Token/Serial tidak ada!")
-        window.location.href = "https://da5100.github.io/auth/"
-    } else if(!serialKey){
-        alert("Serial key tidak ada!")
-        window.location.href = "https://da5100.github.io/auth/"
-    }else if(emailDatamd5 !== emailmd5){
-        alert("Sesi tidak sah! Coba login kembali menggunakan akun yang terdaftar!")
-        window.location.href = "https://da5100.github.io/auth/"
-    } else {
-        console.log("Email: " + getData.email + " valid!, md5: " + emailDatamd5 + " | " + emailmd5);
+        if(!userToken || !doc.exists) {
+            alert("Token/Serial tidak ada!")
+            window.location.href = "https://da5100.github.io/auth/"
+        } else if(!serialKey){
+            alert("Serial key tidak ada!")
+            window.location.href = "https://da5100.github.io/auth/"
+        }else if(emailDatamd5 !== emailmd5){
+            alert("Sesi tidak sah! Coba login kembali menggunakan akun yang terdaftar!")
+            window.location.href = "https://da5100.github.io/auth/"
+        } else {
+            console.log("Email: " + getData.email + " valid!, md5: " + emailDatamd5 + " | " + emailmd5);
     }
     });
     }
