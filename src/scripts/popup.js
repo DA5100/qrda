@@ -5,6 +5,7 @@ function openPopup(title, content, type, redirectUrl = null) {
   
     const popup = document.createElement("div");
     popup.id = "popup";
+    popup.className = "popup hidden";
     document.body.appendChild(popup);
     const popupContent = document.createElement("div");
     popupContent.id = "popup-content";
