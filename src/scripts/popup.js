@@ -1,6 +1,10 @@
 let url;
 let firstLoad = true;
 
+window.addEventListener("popstate", function() {
+  window.location.reload();
+});
+
 function openPopup(title, content, type, redirectUrl = null, onLoad = null) {
 
   const style = document.createElement("style");
@@ -142,8 +146,4 @@ function closePopup() {
     window.location.href = url;
   }
 }
-
-window.addEventListener("popstate", function() {
-  window.location.reload();
-});
 
