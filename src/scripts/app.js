@@ -18,10 +18,16 @@ const serialKey = params.get("serial_key");
 document.addEventListener("DOMContentLoaded", function(){
     auth.onAuthStateChanged((user) => {
     const currentUser = auth.currentUser;
+    function isValidFormat(str) {
+        const regex = /^[A-Za-z0-9]{5}[A-Za-z0-9]{5}$/;
+        return regex.test(str);
+    }
     if (!currentUser) {
         openPopup("Error", "Anda belum login. Silakan login terlebih dahulu untuk melanjutkan.", "error", "https://da5100.github.io/auth/");
         // window.location.href = "https://da5100.github.io/auth/";
         return;
+    } else if (!isValidFormat(serialKey)){
+        openPopup("Error", "Serial Key tidak sesuai format", "error", "https://da5100.github.io/auth/");
     } else {
         console.log("User is logged in:", user.displayName); 
     
