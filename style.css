@@ -48,27 +48,26 @@ body {
     background-color: var(--brown);
 }
 
+/* HTML: <div class="loader"></div> */
 .loader {
-  width: 14em;
-  height: 2em;
-  border-radius: 2rem;
-  color: var(--brown-dark);
-  border: 2px solid;
-  position: relative;
+  width: fit-content;
+  font-size: 40px;
+  line-height: 1.5;
+  font-family: system-ui,sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #0000;
+  -webkit-text-stroke: 1px var(--brown-dark);
+  background:
+    radial-gradient(1.13em at 50% 1.6em,var(--brown-dark) 99%,#0000 101%) calc(50% - 1.6em) 0/3.2em 100% text,
+    radial-gradient(1.13em at 50% -0.8em,#0000 99%,var(--brown-dark) 101%) 50% .8em/3.2em 100% repeat-x  text;
+  animation: l9 2s linear infinite;
 }
-.loader::before {
-  content: "";
-  position: absolute;
-  margin: 0.2rem;
-  inset: 0 100% 0 0;
-  border-radius: inherit;
-  background: currentColor;
-  animation: l6 8s infinite;
+.loader:before {
+  content: "Drama Arena";
 }
-@keyframes l6 {
-    0% {inset: 1;}
-    90% {inset: 0.2;}
-    100% {inset:0}
+@keyframes l9 {
+  to {background-position: calc(50% + 1.6em) 0,calc(50% + 3.2em) .8em}
 }
 
 /* Hero */
@@ -131,9 +130,11 @@ body {
     /* height: 100vh; */
     width: 100%;
     /* background-color: #f0f0f0; */
-    gap: 3rem;
+    gap: 1rem;
     background-color: var(--brown); 
     padding-bottom: 40vh;  
+
+    scroll-behavior: smooth;
 }
 
 @media screen and (min-width: 425px) {
@@ -142,7 +143,53 @@ body {
     }
 }
 
-.gallery img {
+.gallery .img {
+    background-image: url('https://da5100.github.io/assets/img/portfolio/books-1.webp');
+    background-repeat: no-repeat;
+    background-position: center; /* Center the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
+    filter: brightness(0.8);
+    box-shadow: 0px 5px 15px 2px rgba(0,0,0,0.5);
+    
+    width: 30em;
+    height: 20em;
+    aspect-ratio: 3 / 2;      /* Maintain 2:1 ratio = ~600x300 */
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    border-radius: 0.5em;
+    overflow: hidden;
+    
+    transition: all 0.3s ease;
+}
+
+.gallery .img:hover {
+    /* transform: scale(1.05); */
+    filter: brightness(1);
+}
+
+.gallery .img * {
+    
+    color: white;
+    margin-left: 0.5em;
+}
+
+.gallery .img h2 {
+    font-size: 1.2rem;
+    text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8);
+    line-height: 2;
+}
+
+.gallery .img p {
+    font-size: 0.8rem;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1;
+    margin-bottom: 2em;
+    width: 80%;
+}
+
+/* .gallery img {
     z-index: 50;
     width: auto;
     max-height: 250px;
@@ -150,7 +197,7 @@ body {
     border-radius: 10px;
     box-shadow: 0px 5px 15px 2px rgba(0,0,0,0.5);
     transition: all 0.3s ease;
-    /* transform: rotate3D(1, 1, 0, deg); */
+    transform: rotate3D(1, 1, 0, deg);
 }
 
 @media screen and (min-width: 1024px) {
@@ -165,21 +212,24 @@ body {
 
 .gallery img:last-child {
     margin-bottom: -3rem;
-}
+} */
 /* Text Animation */
 
 .text-animation {
     background-color: var(--brown);
+    
 }
 
 @media screen and (min-width: 1024px) {
     .text-animasi {
+        z-index: 1000;
     font-size: 10vw;
 }
 }
 
 @media screen and (min-width: 425px) {
     .text-animasi {
+        z-index: 1000;
     font-size: 20vw;
 }
 }
@@ -187,11 +237,50 @@ body {
 /* Swiper */
 .swiper {
   height: 100vh;
+  
 }
 
 .swiper-embed {
+    cursor: pointer;
   width: 100%;
   height: 100%;
   border: none;
 }
 
+/* Navbar */
+
+@media (max-width: 650px) {
+  .navmenu {
+    display: none;
+  }
+
+  .navbar {
+    height: 7vh;
+    width: 100%;
+    z-index: 990;
+    background-color: var(--brown);
+    display: flex;
+    position: sticky;
+    bottom: 0px;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .navbar ul {
+    list-style-type: none;
+    display: hide
+  } 
+  
+  .navbar li {
+    transition: 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--brown-dark);
+    opacity: 75%;    
+  }
+  
+  .navbar li:hover {
+    transform: translateY(-10px);
+  }
+}
